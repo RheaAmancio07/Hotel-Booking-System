@@ -115,7 +115,7 @@ function doInsert(){
 				
 				$room->update($_POST['ROOMID']); 
 				
-			 	message($_POST['ROOM'] ." Upadated successfully!", "success");
+			 	message($_POST['ROOM'] ." Updated successfully!", "success");
 			 	unset($_SESSION['id']);
 			 	redirect('index.php');
 				 
@@ -165,7 +165,7 @@ function editImg (){
 					$rm->ROOMIMAGE = $location;
 					$rm->update($rm_id); 
 					
-				 	message("Room Image Upadated successfully!", "success");
+				 	message("Room Image Updated successfully!", "success");
 				 	unset($_SESSION['id']);
 				 	 redirect("index.php");
  			}

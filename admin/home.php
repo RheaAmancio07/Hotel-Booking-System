@@ -1,5 +1,6 @@
-<div class="container">
-<h3>Administrator Panel:Welcome <?php echo $_SESSION['ADMIN_UNAME'];?></h3>
+
+<div class="container mt-5 text-white">
+<h3>Administrator Panel: Welcome <?php echo $_SESSION['ADMIN_UNAME'];?></h3>
 
 <div class="panel-group" id="accordion">
   <div class="panel panel-default">
