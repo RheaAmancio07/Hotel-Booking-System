@@ -86,7 +86,7 @@ $mydb->setQuery($sql);
 $mydb->executeQuery(); 
 
 				
-message("Reservation Upadated successfully!", "success");
+message("Reservation Updated successfully!", "success");
 redirect('index.php');
 
 }
@@ -108,7 +108,7 @@ $sql = "UPDATE `tblreservation` SET `STATUS`='Cancelled' WHERE `RESERVEID` ='" .
 mysql_query($sql) or die(mysql_error());
 
 				
-message("Reservation Upadated successfully!", "success");
+message("Reservation Updated successfully!", "success");
 redirect('index.php');
 
 }
@@ -137,7 +137,7 @@ $mydb->executeQuery();
 
 
 
-message("Reservation Upadated successfully!", "success");
+message("Reservation Updated successfully!", "success");
 redirect('index.php');
 
 }	

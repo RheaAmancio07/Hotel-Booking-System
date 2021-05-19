@@ -34,7 +34,7 @@ require_once("../../includes/initialize.php");
         <div class="col-xs-12">
           <h2 class="page-header">
             <i class="fa fa-globe"></i>  
-            Dragon House
+            SHILOH
             <small class="pull-right">Date: <?php echo date('m/d/Y'); ?></small>
           </h2>
         </div>

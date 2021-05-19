@@ -175,158 +175,154 @@ admin_logged_in();
 <body class="bg-secondary text-dark">
 	<!--Header-->
 	<div class="d-flex" id="wrapper" style="margin-top: -70px;">
-		<div class="bg-light border-right bg-dark" style="width:18%; height:100vh;" id="sidebar-wrapper">
-			<a class="navbar-brand text-white" href="#"><strong>SHILOH</strong></a>
+		<div class="bg-light border-right bg-dark " style="width:18%; height:100vh; display:block; overflow:hidden; position:fixed;" id="sidebar-wrapper">
+			<a class="navbar-brand text-white ml-4" style="font-size: 40px; font-family:Georgia, 'Times New Roman', Times, serif;" href="#"><strong>SHILOH</strong></a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
-			<div class="list-group list-group-flush">
-				<!-- <div class="collapse navbar-collapse" id="navbarSupportedContent" style="font-size: 20px; font-family:Georgia, 'Times New Roman', Times, serif;"> -->
+			<div class="list-group list-group-flush ml-1" style="font-size: 28px; font-family:Georgia, 'Times New Roman', Times, serif;">
+				<ul class="navbar-nav mr-auto">
+
+					<li class="<?php echo (currentpage() == 'index.php') ? "nav-item active  list-group-item list-group-item-action bg-light" : false; ?>" style="margin-right:20px;">
+						<a href="<?php echo WEB_ROOT; ?>admin/index.php" class="text-decoration-none text-white "> Home </a>
+					</li>
+					
+					<li class="<?php echo (currentpage() == 'mod_room') ? "nav-item active list-group-item list-group-item-action bg-light" : false; ?>" style="margin-right:20px;">
+						<a href="<?php echo WEB_ROOT; ?>admin/mod_room/index.php" class="text-decoration-none text-white"> Rooms </a>
+					</li>
+
+					<li class="<?php echo (currentpage() == 'mod_accomodation') ? "nav-item active  list-group-item list-group-item-action bg-light" : false; ?>" style="margin-right:20px;">
+						<a href="<?php echo WEB_ROOT; ?>admin/mod_accomodation/index.php" class="text-decoration-none text-white">Accomodation</a>
+					</li>
+
+					<li class="<?php echo (currentpage() == 'mod_reservation') ? "nav-item active  list-group-item list-group-item-action bg-light" : false; ?>" style="margin-right:20px;">
+						<?php
+						$query = "SELECT count(*) as 'Total' FROM `tblpayment` WHERE `STATUS`='Pending'";
+						$mydb->setQuery($query);
+						$cur = $mydb->loadResultList();
+						foreach ($cur as $result) {
+						?>
+							<a href="<?php echo WEB_ROOT; ?>admin/mod_reservation/index.php" class="text-decoration-none text-white">Reservation <?php echo  isset($result->Total) ? '<span style="color:red">(' . $result->Total . ')</span>' : ''; ?> </a>
+						<?php } ?>
+					</li>
+
+					<li class="<?php echo (currentpage() == 'mod_reports') ? "nav-item active  list-group-item list-group-item-action bg-light" : false; ?>" style="margin-right:20px;">
+						<a href="<?php echo WEB_ROOT; ?>admin/mod_reports/index.php" class="text-decoration-none text-white">Reports</a>
+					</li>
+
+				</ul>
+
+				<form class="form-inline my-2 my-lg-0">
 					<ul class="navbar-nav mr-auto">
+						<?php if ($_SESSION['ADMIN_UROLE'] == "Administrator") { ?>
 
-						<li class="<?php echo (currentpage() == 'index.php') ? "nav-item active mr-sm-2 list-group-item list-group-item-action bg-light" : false; ?>" style="margin-right:20px;">
-							<a href="<?php echo WEB_ROOT; ?>admin/index.php" class="text-decoration-none text-white"> Home </a>
-						</li>
-
-						<li class="<?php echo (currentpage() == 'mod_room') ? "nav-item active mr-sm-2 list-group-item list-group-item-action bg-light" : false; ?>" style="margin-right:20px;">
-							<a href="<?php echo WEB_ROOT; ?>admin/mod_room/index.php" class="text-decoration-none text-white"> Rooms </a>
-						</li>
-
-						<li class="<?php echo (currentpage() == 'mod_accomodation') ? "nav-item active mr-sm-2 list-group-item list-group-item-action bg-light" : false; ?>" style="margin-right:20px;">
-							<a href="<?php echo WEB_ROOT; ?>admin/mod_accomodation/index.php" class="text-decoration-none text-white">Accomodation</a>
-						</li>
-
-						<li class="<?php echo (currentpage() == 'mod_reservation') ? "nav-item active mr-sm-2 list-group-item list-group-item-action bg-light" : false; ?>" style="margin-right:20px;">
-							<?php
-							$query = "SELECT count(*) as 'Total' FROM `tblpayment` WHERE `STATUS`='Pending'";
-							$mydb->setQuery($query);
-							$cur = $mydb->loadResultList();
-							foreach ($cur as $result) {
-							?>
-								<a href="<?php echo WEB_ROOT; ?>admin/mod_reservation/index.php" class="text-decoration-none text-white">Reservation <?php echo  isset($result->Total) ? '<span style="color:red">(' . $result->Total . ')</span>' : ''; ?> </a>
-							<?php } ?>
-						</li>
-
-						<li class="<?php echo (currentpage() == 'mod_reports') ? "nav-item active mr-sm-2 list-group-item list-group-item-action bg-light" : false; ?>" style="margin-right:20px;">
-							<a href="<?php echo WEB_ROOT; ?>admin/mod_reports/index.php" class="text-decoration-none text-white">Reports</a>
-						</li>
-
-
-
-					</ul>
-					<form class="form-inline my-2 my-lg-0">
-						<ul class="navbar-nav mr-auto">
-							<?php if ($_SESSION['ADMIN_UROLE'] == "Administrator") { ?>
-
-								<li class="<?php echo (currentpage() == 'mod_users') ? "nav-item active mr-sm-2 list-group-item list-group-item-action bg-light" : false; ?>" style="margin-right:20px; margin-top:5px;">
-									<a href="<?php echo WEB_ROOT; ?>admin/mod_users/index.php" class="text-decoration-none text-white"><i class="fa fa-user-circle " style='font-size:18px'></i> Users</a>
-								</li>
-
-							<?php } ?>
-							<li class="<?php echo (currentpage() == '../logout.php') ? "nav-item active mr-sm-2 list-group-item list-group-item-action bg-light" : false; ?>" style="margin-right:20px;">
-								<button type="button" class="btn bg-transparent border-0" style="font-size:18px;" data-toggle="modal" data-target="#exampleModal"><a class="toggle-modal text-decoration-none text-white "><i class="fa fa-lock"></i> Logout</a></button>
+							<li class="<?php echo (currentpage() == 'mod_users') ? "nav-item active  list-group-item list-group-item-action bg-light" : false; ?>" style="margin-right:20px; margin-top:5px;">
+								<a href="<?php echo WEB_ROOT; ?>admin/mod_users/index.php" class="text-decoration-none text-white"><i class="fa fa-user-circle " style='font-size:18px'></i> Users</a>
 							</li>
-						</ul>
-					</form>
-				</div>
+
+						<?php } ?>
+						<li class="<?php echo (currentpage() == '../logout.php') ? "nav-item active  list-group-item list-group-item-action bg-light" : false; ?>" style="margin-right:20px;">
+							<button type="button" class="btn bg-transparent border-0" style="font-size:25px;" data-toggle="modal" data-target="#exampleModal"><a class="toggle-modal text-decoration-none text-white" style="margin-left: -13px;"><i class="fa fa-lock"></i> Logout</a></button>
+						</li>
+					</ul>
+				</form>
+
+			</div>
+		</div>
+		<!--End of Header-->
+		<div id="page-content-wrapper w-75 justify-content-center">
+			<div class="container">
+
+				<?php //check_message(); 
+				?>
+				<?php require_once $content; ?>
+				<!--/row-->
+
+				<!-- <hr> -->
+				<script src="<?php echo WEB_ROOT; ?>admin/jquery/jquery.min.js"></script>
+				<script src="<?php echo WEB_ROOT; ?>admin/js/bootstrap.min.js"></script>
+
+				<script src="<?php echo WEB_ROOT; ?>js/jquery.dataTables.min.js"></script>
+				<script src="<?php echo WEB_ROOT; ?>js/dataTables.bootstrap.min.js"></script>
+
+
+				<script type="text/javascript" src="<?php echo WEB_ROOT; ?>js/bootstrap-datepicker.js" charset="UTF-8"></script>
+				<script type="text/javascript" src="<?php echo WEB_ROOT; ?>js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+				<script type="text/javascript" src="<?php echo WEB_ROOT; ?>js/bootstrap-datetimepicker.uk.js" charset="UTF-8"></script>
+
+				<script type="text/javascript" language="javascript" src="<?php echo WEB_ROOT; ?>admin/input-mask/jquery.inputmask.js"></script>
+				<script type="text/javascript" language="javascript" src="<?php echo WEB_ROOT; ?>admin/input-mask/jquery.inputmask.date.extensions.js"></script>
+				<script type="text/javascript" language="javascript" src="<?php echo WEB_ROOT; ?>admin/input-mask/jquery.inputmask.extensions.js"></script>
+
+				<footer>
+					<p class="text-white ml-5">&copy;
+						Dragon House
+					</p>
+
+					<script>
+						$(function() {
+							$(".select2").select2();
+						})
+
+
+						$('input[data-mask]').each(function() {
+							var input = $(this);
+							input.setMask(input.data('mask'));
+						});
+
+
+						$('#DATETO').inputmask({
+							mask: "2/1/y h:s",
+							placeholder: "mm/dd/yyyy hh:mm",
+							alias: "datetime",
+							hourFormat: "24"
+						});
+
+
+
+						$('#DATEFROM').inputmask({
+							mask: "2/1/y h:s",
+							placeholder: "mm/dd/yyyy hh:mm",
+							alias: "datetime",
+							hourFormat: "24"
+						});
+
+
+
+						function checkall(selector) {
+							if (document.getElementById('chkall').checked == true) {
+								var chkelement = document.getElementsByName(selector);
+								for (var i = 0; i < chkelement.length; i++) {
+									chkelement.item(i).checked = true;
+								}
+							} else {
+								var chkelement = document.getElementsByName(selector);
+								for (var i = 0; i < chkelement.length; i++) {
+									chkelement.item(i).checked = false;
+								}
+							}
+						}
+
+						function checkNumber(textBox) {
+							while (textBox.value.length > 0 && isNaN(textBox.value)) {
+								textBox.value = textBox.value.substring(0, textBox.value.length - 1)
+							}
+							textBox.value = trim(textBox.value);
+						}
+						//
+						function checkText(textBox) {
+							var alphaExp = /^[a-zA-Z]+$/;
+							while (textBox.value.length > 0 && !textBox.value.match(alphaExp)) {
+								textBox.value = textBox.value.substring(0, textBox.value.length - 1)
+							}
+							textBox.value = trim(textBox.value);
+						}
+					</script>
+				</footer>
 			</div>
 		</div>
 	</div>
 
-
-	<!--End of Header-->
-	<div id="page-content-wrapper w-75 justify-content-center">
-	<div class="container">
-
-		<?php //check_message(); 
-		?>
-		<?php require_once $content; ?>
-		<!--/row-->
-
-		<!-- <hr> -->
-		<script src="<?php echo WEB_ROOT; ?>admin/jquery/jquery.min.js"></script>
-		<script src="<?php echo WEB_ROOT; ?>admin/js/bootstrap.min.js"></script>
-
-		<script src="<?php echo WEB_ROOT; ?>js/jquery.dataTables.min.js"></script>
-		<script src="<?php echo WEB_ROOT; ?>js/dataTables.bootstrap.min.js"></script>
-
-
-		<script type="text/javascript" src="<?php echo WEB_ROOT; ?>js/bootstrap-datepicker.js" charset="UTF-8"></script>
-		<script type="text/javascript" src="<?php echo WEB_ROOT; ?>js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
-		<script type="text/javascript" src="<?php echo WEB_ROOT; ?>js/bootstrap-datetimepicker.uk.js" charset="UTF-8"></script>
-
-		<script type="text/javascript" language="javascript" src="<?php echo WEB_ROOT; ?>admin/input-mask/jquery.inputmask.js"></script>
-		<script type="text/javascript" language="javascript" src="<?php echo WEB_ROOT; ?>admin/input-mask/jquery.inputmask.date.extensions.js"></script>
-		<script type="text/javascript" language="javascript" src="<?php echo WEB_ROOT; ?>admin/input-mask/jquery.inputmask.extensions.js"></script>
-
-		<footer>
-			<!-- <p class="text-white ml-5">&copy;
-				Dragon House
-
-
-			</p> -->
-
-			<script>
-				$(function() {
-					$(".select2").select2();
-				})
-
-
-				$('input[data-mask]').each(function() {
-					var input = $(this);
-					input.setMask(input.data('mask'));
-				});
-
-
-				$('#DATETO').inputmask({
-					mask: "2/1/y h:s",
-					placeholder: "mm/dd/yyyy hh:mm",
-					alias: "datetime",
-					hourFormat: "24"
-				});
-
-
-
-				$('#DATEFROM').inputmask({
-					mask: "2/1/y h:s",
-					placeholder: "mm/dd/yyyy hh:mm",
-					alias: "datetime",
-					hourFormat: "24"
-				});
-
-
-
-				function checkall(selector) {
-					if (document.getElementById('chkall').checked == true) {
-						var chkelement = document.getElementsByName(selector);
-						for (var i = 0; i < chkelement.length; i++) {
-							chkelement.item(i).checked = true;
-						}
-					} else {
-						var chkelement = document.getElementsByName(selector);
-						for (var i = 0; i < chkelement.length; i++) {
-							chkelement.item(i).checked = false;
-						}
-					}
-				}
-
-				function checkNumber(textBox) {
-					while (textBox.value.length > 0 && isNaN(textBox.value)) {
-						textBox.value = textBox.value.substring(0, textBox.value.length - 1)
-					}
-					textBox.value = trim(textBox.value);
-				}
-				//
-				function checkText(textBox) {
-					var alphaExp = /^[a-zA-Z]+$/;
-					while (textBox.value.length > 0 && !textBox.value.match(alphaExp)) {
-						textBox.value = textBox.value.substring(0, textBox.value.length - 1)
-					}
-					textBox.value = trim(textBox.value);
-				}
-			</script>
-		</footer>
-	</div>
 	<!--/.container-->
 </body>
 
